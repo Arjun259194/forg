@@ -1,3 +1,4 @@
+use colored::Colorize;
 use std::{collections::HashMap, path::PathBuf};
 
 use structopt::StructOpt;
@@ -80,16 +81,28 @@ pub fn run(dir: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
                 .get(extension.to_string_lossy().to_string().trim())
                 .unwrap_or(&"Other".to_string())
                 .to_string();
-            let target_dir = dir.join(file_type);
+            let target_dir = dir.join(&file_type);
             std::fs::create_dir_all(&target_dir)?;
             let targer_path = target_dir.join(file_path.file_name().unwrap());
             std::fs::rename(&file_path, &targer_path)?;
-            println!(
-                "{0} Moved to {1}",
-                file_path.display(),
-                targer_path.display()
+            moved_message(
+                file_path
+                    .file_name()
+                    .unwrap_or_default()
+                    .to_string_lossy()
+                    .to_string(),
+                file_type,
             );
         }
     }
     Ok(())
+}
+
+fn moved_message(s1: String, s2: String) {
+    println!(
+        "{} --> {:.20} --> {}",
+        "Moving...".bright_yellow(),
+        s1.green(),
+        s2.bright_blue()
+    );
 }

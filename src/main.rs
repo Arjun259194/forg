@@ -1,3 +1,4 @@
+extern crate colored;
 use std::process;
 use structopt::StructOpt;
 
