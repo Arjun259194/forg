@@ -14,59 +14,64 @@ pub struct Args {
 }
 
 fn get_extension_map() -> HashMap<String, String> {
-    let mut map: HashMap<String, String> = HashMap::new();
-    map.insert(String::from("png"), String::from("Image"));
-    map.insert(String::from("jpg"), String::from("Image"));
-    map.insert(String::from("jpeg"), String::from("Image"));
-    map.insert(String::from("gif"), String::from("Image"));
-    map.insert(String::from("bmp"), String::from("Image"));
-    map.insert(String::from("svg"), String::from("Image"));
-    map.insert(String::from("txt"), String::from("Document"));
-    map.insert(String::from("pdf"), String::from("Document"));
-    map.insert(String::from("doc"), String::from("Document"));
-    map.insert(String::from("docx"), String::from("Document"));
-    map.insert(String::from("xls"), String::from("Document"));
-    map.insert(String::from("xlsx"), String::from("Document"));
-    map.insert(String::from("ppt"), String::from("Document"));
-    map.insert(String::from("pptx"), String::from("Document"));
-    map.insert(String::from("odt"), String::from("Document"));
-    map.insert(String::from("mp3"), String::from("Audio"));
-    map.insert(String::from("wav"), String::from("Audio"));
-    map.insert(String::from("flac"), String::from("Audio"));
-    map.insert(String::from("ogg"), String::from("Audio"));
-    map.insert(String::from("m4a"), String::from("Audio"));
-    map.insert(String::from("mp4"), String::from("Video"));
-    map.insert(String::from("avi"), String::from("Video"));
-    map.insert(String::from("mkv"), String::from("Video"));
-    map.insert(String::from("mov"), String::from("Video"));
-    map.insert(String::from("wmv"), String::from("Video"));
-    map.insert(String::from("zip"), String::from("Archive"));
-    map.insert(String::from("rar"), String::from("Archive"));
-    map.insert(String::from("tar"), String::from("Archive"));
-    map.insert(String::from("gz"), String::from("Archive"));
-    map.insert(String::from("7z"), String::from("Archive"));
-    map.insert(String::from("c"), String::from("Code"));
-    map.insert(String::from("cpp"), String::from("Code"));
-    map.insert(String::from("h"), String::from("Code"));
-    map.insert(String::from("hpp"), String::from("Code"));
-    map.insert(String::from("py"), String::from("Code"));
-    map.insert(String::from("java"), String::from("Code"));
-    map.insert(String::from("js"), String::from("Code"));
-    map.insert(String::from("sh"), String::from("Script"));
-    map.insert(String::from("sh"), String::from("Script"));
-    map.insert(String::from("bat"), String::from("Script"));
-    map.insert(String::from("ps1"), String::from("Script"));
-    map.insert(String::from("html"), String::from("Web"));
-    map.insert(String::from("css"), String::from("Web"));
-    map.insert(String::from("php"), String::from("Web"));
-    map.insert(String::from("csv"), String::from("Spreadsheet"));
-    map.insert(String::from("exe"), String::from("Executable"));
-    map.insert(String::from("exe"), String::from("Executable"));
-    map.insert(String::from("out"), String::from("Executable"));
-    map.insert(String::from("app"), String::from("Executable"));
-    map.insert(String::from("deb"), String::from("Linux_Binaries"));
-    map.insert(String::from("rpm"), String::from("Linux_Binaries"));
-    map
+    let extensions: Vec<(&str, &str)> = vec![
+        ("png", "Image"),
+        ("jpg", "Image"),
+        ("jpeg", "Image"),
+        ("gif", "Image"),
+        ("bmp", "Image"),
+        ("svg", "Image"),
+        ("txt", "Document"),
+        ("pdf", "Document"),
+        ("doc", "Document"),
+        ("docx", "Document"),
+        ("xls", "Document"),
+        ("xlsx", "Document"),
+        ("ppt", "Document"),
+        ("pptx", "Document"),
+        ("odt", "Document"),
+        ("mp3", "Audio"),
+        ("wav", "Audio"),
+        ("flac", "Audio"),
+        ("ogg", "Audio"),
+        ("m4a", "Audio"),
+        ("mp4", "Video"),
+        ("avi", "Video"),
+        ("mkv", "Video"),
+        ("mov", "Video"),
+        ("wmv", "Video"),
+        ("zip", "Archive"),
+        ("rar", "Archive"),
+        ("tar", "Archive"),
+        ("gz", "Archive"),
+        ("7z", "Archive"),
+        ("c", "Code"),
+        ("cpp", "Code"),
+        ("h", "Code"),
+        ("hpp", "Code"),
+        ("py", "Code"),
+        ("java", "Code"),
+        ("js", "Code"),
+        ("sh", "Script"),
+        ("sh", "Script"),
+        ("bat", "Script"),
+        ("ps1", "Script"),
+        ("html", "Web"),
+        ("css", "Web"),
+        ("php", "Web"),
+        ("csv", "Spreadsheet"),
+        ("exe", "Executable"),
+        ("exe", "Executable"),
+        ("out", "Executable"),
+        ("app", "Executable"),
+        ("deb", "Linux_Binaries"),
+        ("rpm", "Linux_Binaries"),
+    ];
+
+    extensions
+        .iter()
+        .map(|(ext, cat)| (ext.to_string(), cat.to_string()))
+        .collect()
 }
 
 pub fn run(dir: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
